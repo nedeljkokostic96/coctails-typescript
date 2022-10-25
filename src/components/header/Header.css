@@ -1,0 +1,7 @@
+.menu-icon:hover {
+    cursor: pointer;
+}
+
+.header-text::selection {
+    background-color: transparent;
+}

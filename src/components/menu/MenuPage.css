@@ -1,0 +1,20 @@
+.menu-page {
+    background: -webkit-radial-gradient(top right, #F7247D, #DD5BBB, #CD55D2);
+    background: radial-gradient(at top right, #F7247D, #DD5BBB, #CD55D2);
+    height: 100vh;
+    position: absolute;
+    transform: rotateX(180);
+    right: 0;
+    overflow: hidden;
+    z-index: 99;
+}
+
+ @keyframes slide {
+     from {
+         width: 0%;
+     }
+
+     to {
+         width: 100vw;
+     }
+ }
