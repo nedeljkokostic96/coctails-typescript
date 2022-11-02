@@ -6,12 +6,18 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { CocktailCardData } from "../../model/ICocktailCardData";
 import "./CocktailCard.css";
+import { useNavigate } from "react-router-dom";
+import { createSlug } from "../../../utils/util";
+import { useAppDispatch } from "../../../hooks/hook";
+import { getCocktailByID } from "../../../redux/coctailSlice";
 
 const CocktailCard: React.FC<CocktailCardData> = ({
   strDrink,
   idDrink,
   strDrinkThumb,
 }: CocktailCardData) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   return (
     <Card
       className="card-style"
@@ -22,7 +28,13 @@ const CocktailCard: React.FC<CocktailCardData> = ({
       }}
       style={{ marginRight: 0, paddingRight: 0, width: "auto" }}
     >
-      <CardActionArea sx={{ height: "inherit" }}>
+      <CardActionArea
+        onClick={() => {
+          dispatch(getCocktailByID(idDrink));
+          navigate("/cocktail/" + createSlug(strDrink));
+        }}
+        sx={{ height: "inherit" }}
+      >
         <CardMedia
           component="img"
           height="auto"

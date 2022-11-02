@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+import { Cocktail } from "../components/model/ICocktail";
 import { CocktailCardData } from "../components/model/ICocktailCardData";
 import { Feedback } from "../components/model/IFeedback";
 import {
@@ -37,6 +38,19 @@ export const fetchCocktailsByCategory = createAsyncThunk(
   }
 );
 
+export const getCocktailByID = createAsyncThunk(
+  "cocktails/getCocktailByID",
+  async (payload: string, thunkAPI) => {
+    try {
+      const url = BASE_URL + "lookup.php?i=" + payload;
+      const { data } = await axios.get(url);
+      return data.drinks[0] as Cocktail;
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Something went wrong!");
+    }
+  }
+);
+
 export interface MainMenuItems {
   category: Array<Category>;
   ingridients: Array<Category>;
@@ -45,6 +59,7 @@ export interface MainMenuItems {
 }
 
 export interface AppState {
+  cocktail: Cocktail;
   cocktailArr: Array<CocktailCardData>;
   mainMenuItems: MainMenuItems;
   feedback: Feedback;
@@ -66,6 +81,7 @@ interface CocktailActionData {
 
 const initialState: AppState = {
   cocktailArr: [],
+  cocktail: {} as Cocktail,
   mainMenuItems: {
     category: [],
     ingridients: [],
@@ -126,6 +142,26 @@ const cocktailSlice = createSlice({
     builder.addCase(
       fetchCocktailsByCategory.rejected,
       (state: AppState, action: any) => {
+        state.feedback.status = "REJECTED";
+        state.feedback.message = action.payload.message;
+      }
+    );
+    builder.addCase(getCocktailByID.pending, (state: AppState) => {
+      state.cocktail = {} as Cocktail;
+      state.feedback.status = "LOADING";
+    });
+    builder.addCase(
+      getCocktailByID.fulfilled,
+      (state: AppState, action: PayloadAction<Cocktail>) => {
+        state.feedback.status = "LOADED";
+        console.log(action.payload);
+        state.cocktail = action.payload;
+      }
+    );
+    builder.addCase(
+      getCocktailByID.rejected,
+      (state: AppState, action: any) => {
+        state.cocktail = {} as Cocktail;
         state.feedback.status = "REJECTED";
         state.feedback.message = action.payload.message;
       }

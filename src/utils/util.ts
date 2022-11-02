@@ -46,4 +46,11 @@ export function transformData(data: Array<any>, dataType: string) {
   });
 }
 
+export function createSlug(value: string) {
+  return value
+    .replace(/[^a-z0-9_]+/gi, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase();
+}
+
 export const BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/";

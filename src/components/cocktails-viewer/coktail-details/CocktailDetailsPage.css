@@ -1,0 +1,11 @@
+.cocktail-details-page {
+    border: 1px solid #ee0df7;
+    border-radius: 0.5rem;
+    -webkit-box-shadow: -1px 1px 5px 3px #ee0df7;
+        -moz-box-shadow: -1px 1px 5px 3px #ee0df7;
+        box-shadow: -1px 1px 5px 3px #ee0df7;
+    min-height: 96vh;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #ee0df7;
+}

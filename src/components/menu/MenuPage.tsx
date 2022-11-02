@@ -26,8 +26,6 @@ const MenuPage: React.FC = () => {
     menuItems.forEach((item) => dispatch(getMenuData(item)));
   }, []);
 
-  console.log(feedback);
-
   const handleClickSubmenuItem = (item: Category) => {
     dispatch(
       fetchCocktailsByCategory({ type: menuItemOvered, value: item.title })
