@@ -15,7 +15,6 @@ const SearchField: React.FC<Props> = ({ handleClose }) => {
   return (
     <TextField
       id="standard-name"
-      label="Name"
       className=""
       value={"12312"}
       onChange={() => {}}

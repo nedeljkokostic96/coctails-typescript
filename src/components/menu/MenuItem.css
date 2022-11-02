@@ -1,0 +1,20 @@
+.main-menu-item {
+    cursor: pointer;
+}
+
+.main-menu-item:hover {
+    text-decoration: underline;
+}
+
+.main-menu-item::selection{
+    background-color: inherit;
+}
+
+.sub-menu-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.sub-menu-item::selection{
+    background-color: inherit;
+}

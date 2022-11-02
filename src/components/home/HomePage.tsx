@@ -1,7 +1,11 @@
-import { Props } from "../model/IHomePage";
+import Header from "../header/Header";
 
-const HomePage: React.FC<Props> = ({ children }: Props) => {
-  return <div className="home-page">{children}</div>;
+const HomePage: React.FC = () => {
+  return (
+    <div className="App">
+      <Header menu={false} />
+    </div>
+  );
 };
 
 export default HomePage;

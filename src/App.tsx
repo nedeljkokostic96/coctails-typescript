@@ -5,8 +5,8 @@ import { setMobileWidth } from "./redux/appSlice";
 import { getWindowSize } from "./utils/util";
 import { useAppDispatch, useAppSelector } from "./hooks/hook";
 import MenuPage from "./components/menu/MenuPage";
-import { Container } from "@mui/system";
-import { getCategories } from "./redux/coctailSlice";
+import CocktailLayoutManager from "./components/cocktails-viewer/cocktail-layout-manager/CocktailLayoutManager";
+import HomePage from "./components/home/HomePage";
 
 function App() {
   const [windowSize, setWindowSize] = useState(getWindowSize());
@@ -17,8 +17,6 @@ function App() {
     function handleWindowResize() {
       setWindowSize(getWindowSize());
     }
-
-    dispatch(getCategories());
 
     window.addEventListener("resize", handleWindowResize);
 
@@ -37,16 +35,8 @@ function App() {
         <MenuPage />
       ) : (
         <>
-          <div className="App">
-            <Header menu={false} />
-          </div>
-          <Container
-            maxWidth="xl"
-            style={{
-              height: "100vh",
-              border: "1px solid yellow",
-            }}
-          ></Container>
+          <HomePage />
+          <CocktailLayoutManager />
         </>
       )}
     </>

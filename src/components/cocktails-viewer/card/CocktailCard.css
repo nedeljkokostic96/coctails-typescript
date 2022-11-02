@@ -1,0 +1,10 @@
+.card-style:hover {
+    -webkit-box-shadow: -1px 1px 5px 3px #ee0df7;
+    -moz-box-shadow: -1px 1px 5px 3px #ee0df7;
+    box-shadow: -1px 1px 5px 3px #ee0df7;
+}
+
+.card-style {
+    border: 1px solid #ee0df7;
+    color: #ee0df7;
+}

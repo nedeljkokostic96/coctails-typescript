@@ -1,11 +1,11 @@
 .menu-page {
-    background: -webkit-radial-gradient(top right, #F7247D, #DD5BBB, #CD55D2);
-    background: radial-gradient(at top right, #F7247D, #DD5BBB, #CD55D2);
+    background: -webkit-radial-gradient(top right, #ee1669, #DD5BBB, #CD55D2);
+    background: radial-gradient(at top right, #d752c7, #fa1f74, #ee2c94, #7f357f);
     height: 100vh;
     position: absolute;
     transform: rotateX(180);
     right: 0;
-    overflow: hidden;
+    overflow-y: scroll;
     z-index: 99;
 }
 

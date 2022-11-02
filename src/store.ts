@@ -5,7 +5,7 @@ import cocktailReducer from "./redux/coctailSlice";
 export const store = configureStore({
   reducer: {
     app: appReducer,
-    cocktails: cocktailReducer,
+    cockatils: cocktailReducer,
   },
 });
 
