@@ -154,7 +154,6 @@ const cocktailSlice = createSlice({
       getCocktailByID.fulfilled,
       (state: AppState, action: PayloadAction<Cocktail>) => {
         state.feedback.status = "LOADED";
-        console.log(action.payload);
         state.cocktail = action.payload;
       }
     );
