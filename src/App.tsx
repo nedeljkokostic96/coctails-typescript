@@ -8,11 +8,17 @@ import MenuPage from "./components/menu/MenuPage";
 import HomePage from "./components/home/HomePage";
 import CocktailDetailsPage from "./components/cocktails-viewer/coktail-details/CocktailDetailsPage";
 import NotFoundPage from "./components/NotFoundPage";
+import ConfirmAge from "./components/confirm-age/ConfirmAge";
 
 function App() {
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const menuOpen = useAppSelector((store) => store.app.menuOpen);
+  const birthYear = useState(localStorage.getItem("birth-year"));
   const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+
+  // }, [birthYear]);
 
   useEffect(() => {
     function handleWindowResize() {
@@ -38,12 +44,18 @@ function App() {
         <>
           <Router>
             <Routes>
-              <Route path="/home" element={<HomePage />} />
-              <Route
-                path="/cocktail/:strDrink"
-                element={<CocktailDetailsPage />}
-              />
-              <Route path="*" element={<NotFoundPage />} />
+              {!localStorage.getItem("birth-year") && !validateYears() ? (
+                <Route path="/" element={<ConfirmAge />} />
+              ) : (
+                <>
+                  <Route path="/home" element={<HomePage />} />
+                  <Route
+                    path="/cocktail/:strDrink"
+                    element={<CocktailDetailsPage />}
+                  />
+                  <Route path="*" element={<NotFoundPage />} />
+                </>
+              )}
             </Routes>
           </Router>
         </>
@@ -53,3 +65,8 @@ function App() {
 }
 
 export default App;
+
+function validateYears() {
+  const years = localStorage.getItem("birth-year") as string;
+  return new Date().getFullYear() - parseInt(years) > 18;
+}

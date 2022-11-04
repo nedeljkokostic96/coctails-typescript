@@ -11,7 +11,7 @@ const CocktailLayoutManager: React.FC = () => {
       <Container
         id="div-to-scroll"
         sx={{
-          marginTop: "2rem",
+          marginTop: "3rem",
           width: window.innerWidth < 1250 ? "84vw" : "auto",
           borderTop: "0.1rem solid #ee0df7",
         }}

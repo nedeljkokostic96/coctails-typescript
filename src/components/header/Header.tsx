@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hook";
 import { clickMenuOpen } from "../../redux/appSlice";
 import { Props } from "../model/IHeader";
 import SearchComponent from "./search/SearchComponent";
+import LocalBarIcon from "@mui/icons-material/LocalBar";
 
 const Header: React.FC<Props> = ({ menu }: Props) => {
   const mobileWindow = useAppSelector((store) => store.app.mobileOpen);
@@ -41,8 +42,9 @@ const Header: React.FC<Props> = ({ menu }: Props) => {
             className="header-text"
             sx={{ flexGrow: 1, fontWeight: "bold" }}
           >
-            COCKTAILS
+            <LocalBarIcon />C
           </Typography>
+
           <SearchComponent />
           {!menu ? (
             <>
