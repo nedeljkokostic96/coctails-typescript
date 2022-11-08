@@ -51,6 +51,19 @@ export const getCocktailByID = createAsyncThunk(
   }
 );
 
+export const getCocktailByName = createAsyncThunk(
+  "cocktails/getCocktailByName",
+  async (payload: string, thunkAPI) => {
+    try {
+      const url = BASE_URL + "search.php?s=" + payload;
+      const { data } = await axios.get(url);
+      return data.drinks as Cocktail;
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Something went wrong!");
+    }
+  }
+);
+
 export interface MainMenuItems {
   category: Array<Category>;
   ingridients: Array<Category>;
@@ -61,6 +74,7 @@ export interface MainMenuItems {
 export interface AppState {
   cocktail: Cocktail;
   cocktailArr: Array<CocktailCardData>;
+  cocktailSearchList: Array<Cocktail>;
   mainMenuItems: MainMenuItems;
   feedback: Feedback;
 }
@@ -81,6 +95,7 @@ interface CocktailActionData {
 
 const initialState: AppState = {
   cocktailArr: [],
+  cocktailSearchList: [],
   cocktail: {} as Cocktail,
   mainMenuItems: {
     category: [],
@@ -161,6 +176,24 @@ const cocktailSlice = createSlice({
       getCocktailByID.rejected,
       (state: AppState, action: any) => {
         state.cocktail = {} as Cocktail;
+        state.feedback.status = "REJECTED";
+        state.feedback.message = action.payload.message;
+      }
+    );
+    builder.addCase(getCocktailByName.pending, (state: AppState) => {
+      state.cocktailSearchList = new Array<Cocktail>();
+      state.feedback.status = "LOADING";
+    });
+    builder.addCase(
+      getCocktailByName.fulfilled,
+      (state: AppState, action: any) => {
+        state.cocktailSearchList = action.payload;
+        state.feedback.status = "LOADED";
+      }
+    );
+    builder.addCase(
+      getCocktailByName.rejected,
+      (state: AppState, action: any) => {
         state.feedback.status = "REJECTED";
         state.feedback.message = action.payload.message;
       }

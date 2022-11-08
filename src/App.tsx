@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { setMobileWidth } from "./redux/appSlice";
-import { getWindowSize } from "./utils/util";
+import { getWindowSize, validateYears } from "./utils/util";
 import { useAppDispatch, useAppSelector } from "./hooks/hook";
 import MenuPage from "./components/menu/MenuPage";
 import HomePage from "./components/home/HomePage";
@@ -44,18 +44,13 @@ function App() {
         <>
           <Router>
             <Routes>
-              {!localStorage.getItem("birth-year") && !validateYears() ? (
-                <Route path="/" element={<ConfirmAge />} />
-              ) : (
-                <>
-                  <Route path="/home" element={<HomePage />} />
-                  <Route
-                    path="/cocktail/:strDrink"
-                    element={<CocktailDetailsPage />}
-                  />
-                  <Route path="*" element={<NotFoundPage />} />
-                </>
-              )}
+              <Route path="/" element={<ConfirmAge />} />
+              <Route path="/home" element={<HomePage />} />
+              <Route
+                path="/cocktail/:strDrink"
+                element={<CocktailDetailsPage />}
+              />
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </Router>
         </>
@@ -65,8 +60,3 @@ function App() {
 }
 
 export default App;
-
-function validateYears() {
-  const years = localStorage.getItem("birth-year") as string;
-  return new Date().getFullYear() - parseInt(years) > 18;
-}

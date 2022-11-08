@@ -13,6 +13,7 @@
     color: #ee0df7;
     border: 1px solid #ee0df7;
     margin-top: 1rem;
+    cursor: pointer;
 }
 
 .list-item {

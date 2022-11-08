@@ -1,10 +1,18 @@
 import { Container, Grid, CardMedia, Card } from "@mui/material";
+import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../../hooks/hook";
-import { getIngridientsArray, LOREM_IPSUM_TEXT } from "../../../utils/util";
+import {
+  getIngridientsArray,
+  LOREM_IPSUM_TEXT,
+  validateYears,
+} from "../../../utils/util";
 import "./CocktailDetailsPage.css";
 
 const CocktailDetailsPage: React.FC = () => {
   const { cocktail } = useAppSelector((store) => store.cockatils);
+  if (!localStorage.getItem("birth-year") || !validateYears()) {
+    return <Navigate to="/" replace />;
+  }
   return (
     <>
       <Container maxWidth="md" className="cocktail-details-page">
@@ -19,6 +27,7 @@ const CocktailDetailsPage: React.FC = () => {
         >
           <Grid
             item
+            container
             direction="column"
             display="flex"
             alignItems="center"
@@ -42,6 +51,7 @@ const CocktailDetailsPage: React.FC = () => {
           <Grid
             className="ingridients-grid"
             item
+            container
             direction="column"
             display="flex"
             alignItems="center"
@@ -58,6 +68,7 @@ const CocktailDetailsPage: React.FC = () => {
               <h2 className="cocktail-title">{cocktail.strDrink}</h2>
             </Grid>
             <Grid
+              container
               direction="column"
               display="flex"
               alignItems="center"

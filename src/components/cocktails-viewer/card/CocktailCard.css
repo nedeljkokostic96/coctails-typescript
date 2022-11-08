@@ -2,6 +2,7 @@
     -webkit-box-shadow: -1px 1px 5px 3px #ee0df7;
     -moz-box-shadow: -1px 1px 5px 3px #ee0df7;
     box-shadow: -1px 1px 5px 3px #ee0df7;
+    transform: scale(1.1);
 }
 
 .card-style {
